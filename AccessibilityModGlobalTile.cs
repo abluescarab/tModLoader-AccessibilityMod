@@ -1,14 +1,23 @@
 ﻿using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace AccessibilityMod {
     public class AccessibilityModGlobalTile : GlobalTile {
-        public override void MouseOver(int i, int j, int type) {
-            if(!IsOre(Main.tile[i, j])) {
-                return;
-            }
+        public override void MouseOverFar(int i, int j, int type) {
+            Tile tile = Main.tile[i, j];
 
-            AccessibilityModSystem.UI.ShowOreTooltip(type);
+            if(IsOre(Main.tile[i, j])) {
+                AccessibilityModSystem.UI.ShowOreTooltip(type, true);
+            }
+        }
+
+        public override void MouseOver(int i, int j, int type) {
+            Tile tile = Main.tile[i, j];
+
+            if(IsOre(Main.tile[i, j])) {
+                AccessibilityModSystem.UI.ShowOreTooltip(type, true);
+            }
         }
 
         private bool IsOre(Tile tile) {

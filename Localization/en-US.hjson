@@ -1,12 +1,33 @@
 ﻿Mods: {
     AccessibilityMod: {
-        AllowDraggingPanel_Label: Allow dragging panel
-        AllowDraggingPanel_Tooltip: Allow dragging the information panel around the screen
-        ShowOreTooltips_Label: Show ore tooltips
-        ShowOreTooltips_Tooltip: Display a tooltip when hovering over an ore vein in the environment
-        ShowGemTooltips_Label: Show gem tooltips
-        ShowGemTooltips_Tooltip: Display a tooltip when hovering over a gem vein in the environment
-        ShowBackgroundWallAvailable_Label: Show background wall availability
-        ShowBackgroundWallAvailable_Tooltip: Display a tooltip showing whether a background wall is available under your mouse cursor
+        Yes: Yes
+        No: No
+        InfoDisplay_Default: No information
+        ModConfig_Label: Options
+
+        Panel: {
+            PanelOptions_Header: Panel Options
+
+            PanelBackgroundOpacity_Label: Panel background opacity
+
+            AllowDraggingPanel_Label: Allow dragging panel
+            AllowDraggingPanel_Tooltip: Allow dragging the information panel around the screen
+            PanelBackgroundColor_Label: Panel background color
+            PanelBorderColor_Label: Panel border color
+            PanelTextColor_Label: Panel text color
+        }
+        
+        Tooltips: {
+            TooltipOptions_Header: Tooltip Options
+
+            ShowOreTooltips_Label: Show ore tooltips
+            ShowOreTooltips_Tooltip: Display a tooltip when hovering over an ore vein in the environment
+
+            ShowBackgroundWallAvailable_Label: Show background wall availability
+            ShowBackgroundWallAvailable_Tooltip: Display a tooltip showing whether a background wall is available under your mouse cursor
+
+            EnableLongRangeTooltips_Label: Enable long-range tooltips
+            EnableLongRangeTooltips_Tooltip: Display tooltips when the tile is hovered over, regardless of distance from the player
+        }
     }
 }
