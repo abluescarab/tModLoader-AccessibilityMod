@@ -1,0 +1,12 @@
+﻿Mods: {
+    AccessibilityMod: {
+        AllowDraggingPanel_Label: Allow dragging panel
+        AllowDraggingPanel_Tooltip: Allow dragging the information panel around the screen
+        ShowOreTooltips_Label: Show ore tooltips
+        ShowOreTooltips_Tooltip: Display a tooltip when hovering over an ore vein in the environment
+        ShowGemTooltips_Label: Show gem tooltips
+        ShowGemTooltips_Tooltip: Display a tooltip when hovering over a gem vein in the environment
+        ShowBackgroundWallAvailable_Label: Show background wall availability
+        ShowBackgroundWallAvailable_Tooltip: Display a tooltip showing whether a background wall is available under your mouse cursor
+    }
+}
