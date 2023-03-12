@@ -4,7 +4,7 @@ using System.Linq;
 using Terraria.ModLoader;
 
 namespace AccessibilityMod.UI {
-    public class AccessibilityInfoDisplays {
+    public class AccessibilityDisplays {
         private static int nextOrder = 0;
 
         private Dictionary<string, AccessibilityDisplay> displays
@@ -17,7 +17,7 @@ namespace AccessibilityMod.UI {
 
         public int Count => displays.Count;
 
-        public AccessibilityInfoDisplays() {
+        public AccessibilityDisplays() {
             Add(Defaults.OreTooltips, "Ore: {0}",
                 () => ModContent.GetInstance<AccessibilityModConfig>().ShowOreTooltips);
             Add(Defaults.BackgroundWallAvailable, "Wall: {0}",
