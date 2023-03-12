@@ -1,1 +1,10 @@
-Accessibility Mod is a pretty cool mod, it does...this. Modify this file with a description of your mod.
+Accessibility Mod adds a draggable panel with information about the tile under the mouse cursor.
+
+Have another accessibility idea? Leave a comment or open an issue on the GitHub!
+
+Features:
+* Show ore type under mouse cursor
+* Show whether a wall is available under the mouse cursor
+
+[Changelog]
+v1.0.0  2023-03-11
