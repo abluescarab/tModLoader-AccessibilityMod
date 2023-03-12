@@ -1,6 +1,6 @@
 Accessibility Mod adds a draggable panel with information about the tile under the mouse cursor.
 
-Have another accessibility idea? Leave a comment or open an issue on the GitHub!
+Have another accessibility idea? Leave a comment or open an issue on the GitHub! Translators also welcome.
 
 Features:
 * Show ore type under the mouse cursor

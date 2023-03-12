@@ -1,6 +1,6 @@
 ﻿[h1]Accessibility Mod adds a draggable panel with information about the tile under the mouse cursor.[/h1]
 
-[b]Have another accessibility idea? Leave a comment or open an issue on the GitHub![/b]
+[i]Have another accessibility idea? Leave a comment or open an issue on the GitHub! Translators also welcome.[/i]
 
 [b]Features:[/b]
 [list]
