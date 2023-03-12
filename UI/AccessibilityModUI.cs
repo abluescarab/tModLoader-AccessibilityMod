@@ -90,8 +90,8 @@ namespace AccessibilityMod.UI {
 
             AccessibilityModSystem.Displays.SetText(AccessibilityDisplays.Defaults.BackgroundWallAvailable,
                 tile.WallType > 0
-                ? Language.GetTextValue("Mods.AccessibilityMod.Yes")
-                : Language.GetTextValue("Mods.AccessibilityMod.No"));
+                ? Language.GetTextValue("Mods.AccessibilityMod.InfoDisplay_Yes")
+                : Language.GetTextValue("Mods.AccessibilityMod.InfoDisplay_No"));
         }
     }
 }

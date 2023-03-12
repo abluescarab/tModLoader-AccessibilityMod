@@ -1,7 +1,7 @@
 ﻿Mods: {
     AccessibilityMod: {
-        Yes: Yes
-        No: No
+        InfoDisplay_Yes: Yes
+        InfoDisplay_No: No
         InfoDisplay_Default: No information
         ModConfig_Label: Options
         MoveUp_Label: Move up
