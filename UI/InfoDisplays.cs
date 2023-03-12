@@ -8,21 +8,23 @@ namespace AccessibilityMod.UI {
         private static Dictionary<string, InfoDisplay> displays 
             = new Dictionary<string, InfoDisplay>() {
                 {
-                    OreTooltips,
+                    Defaults.OreTooltips,
                     new("Ore: {0}", 
                         () => ModContent.GetInstance<AccessibilityModConfig>()
                         .ShowOreTooltips)
                 },
                 {
-                    BackgroundWallAvailable,
+                    Defaults.BackgroundWallAvailable,
                     new("Wall: {0}", 
                         () => ModContent.GetInstance<AccessibilityModConfig>()
                         .ShowBackgroundWallAvailable)
                 }
             };
 
-        public const string OreTooltips = "OreTooltips";
-        public const string BackgroundWallAvailable = "BackgroundWallAvailable";
+        public struct Defaults {
+            public const string OreTooltips = "OreTooltips";
+            public const string BackgroundWallAvailable = "BackgroundWallAvailable";
+        }
 
         public static void Add(string name, string format, Func<bool> isVisible) {
             displays.Add(name, new(format, isVisible));

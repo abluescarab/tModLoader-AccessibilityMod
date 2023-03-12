@@ -85,13 +85,14 @@ namespace AccessibilityMod.UI {
                 return;
             }
 
-            InfoDisplays.SetText(InfoDisplays.OreTooltips, TileID.Search.GetName(type));
+            InfoDisplays.SetText(InfoDisplays.Defaults.OreTooltips, 
+                TileID.Search.GetName(type));
         }
 
         public void ShowBackgroundWallAvailable() {
             Tile tile = Main.tile[Player.tileTargetX, Player.tileTargetY];
 
-            InfoDisplays.SetText(InfoDisplays.BackgroundWallAvailable,
+            InfoDisplays.SetText(InfoDisplays.Defaults.BackgroundWallAvailable,
                 tile.WallType > 0
                 ? Language.GetTextValue("Mods.AccessibilityMod.Yes")
                 : Language.GetTextValue("Mods.AccessibilityMod.No"));
