@@ -10,6 +10,9 @@
         Panel: {
             PanelOptions_Header: Panel Options
 
+            ShowReorderButtons_Label: Show reorder buttons
+            ShowReorderButtons_Tooltip: Show buttons that move info lines up or down
+
             AllowDraggingPanel_Label: Allow dragging panel
             AllowDraggingPanel_Tooltip: Allow dragging the information panel around the screen
 
