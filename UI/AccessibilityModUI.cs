@@ -1,6 +1,7 @@
 ﻿using CustomSlot.UI;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using System.Linq;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
@@ -17,6 +18,7 @@ namespace AccessibilityMod {
 
         public DraggableUIPanel Panel { get; private set; }
         public Dictionary<DisplayType, InfoDisplay> InfoElements { get; private set; }
+        public bool IsVisible { get; set; }
         public static Vector2 DefaultCoordinates => new Vector2(0, 20);
 
         private AccessibilityModConfig config;
@@ -30,20 +32,8 @@ namespace AccessibilityMod {
             };
 
             Panel = new DraggableUIPanel();
-
-            int lineSpacing = FontAssets.MouseText.Value.LineSpacing;
-
             Panel.HAlign = 0.5f;
-            Panel.MinWidth.Set(0, 0);
-            Panel.Height.Set(lineSpacing * InfoElements.Count + (lineSpacing / 2), 0);
-
-            int index = 0;
-
-            foreach(InfoDisplay display in InfoElements.Values) {
-                display.Left.Set(0, 0);
-                display.Top.Set(lineSpacing * index++, 0);
-                Panel.Append(display);
-            }
+            CheckVisibility();
 
             Append(Panel);
         }
@@ -70,6 +60,35 @@ namespace AccessibilityMod {
         public void SetPosition(float x, float y) {
             Panel.Left.Set(x, 0);
             Panel.Top.Set(y, 0);
+        }
+
+        public void CheckVisibility() {
+            IEnumerable<InfoDisplay> visibleDisplays 
+                = InfoElements.Values.Where(i => i.IsVisible);
+            int displayed = visibleDisplays.Count();
+            int lineSpacing = FontAssets.MouseText.Value.LineSpacing;
+            int index = 0;
+
+            Panel.RemoveAllChildren();
+
+            Panel.MinWidth.Set(0, 0);
+            Panel.Height.Set(
+                lineSpacing
+                * displayed
+                + (lineSpacing / 2), 0);
+
+            foreach(InfoDisplay display in visibleDisplays) {
+                display.Left.Set(0, 0);
+                display.Top.Set(lineSpacing * index++, 0);
+                Panel.Append(display);
+            }
+
+            if(displayed > 0) {
+                IsVisible = true;
+            }
+            else {
+                IsVisible = false;
+            }
         }
 
         public void ShowOreTooltip(int type, bool longRange) {

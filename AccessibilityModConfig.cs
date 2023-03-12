@@ -67,6 +67,8 @@ namespace AccessibilityMod {
                 AccessibilityModSystem.UI.ResetPosition();
                 ResetPanelLocation = false;
             }
+
+            AccessibilityModSystem.UI.CheckVisibility();
         }
     }
 }

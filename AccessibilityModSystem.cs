@@ -24,7 +24,9 @@ namespace AccessibilityMod {
         }
 
         public override void UpdateUI(GameTime gameTime) {
-            modInterface?.Update(gameTime);
+            if(UI.IsVisible) {
+                modInterface?.Update(gameTime);
+            }
         }
 
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers) {
@@ -36,7 +38,10 @@ namespace AccessibilityMod {
                     new LegacyGameInterfaceLayer(
                         "Accessibility Mod: Custom UI",
                         () => {
-                            modInterface.Draw(Main.spriteBatch, new GameTime());
+                            if(UI.IsVisible) {
+                                modInterface.Draw(Main.spriteBatch, new GameTime());
+                            }
+
                             return true;
                         },
                         InterfaceScaleType.UI));
