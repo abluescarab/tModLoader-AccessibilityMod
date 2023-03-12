@@ -20,7 +20,7 @@ namespace AccessibilityMod.UI {
         public int Order { get; set; }
         public bool IsVisible => isVisible();
 
-        private string translation = "Mods.AccessibilityMod.InfoDisplay_Default";
+        private string translation = "Mods.AccessibilityMod.Info.Default";
 
         public AccessibilityDisplay(string name, string format, Func<bool> isVisible, int order) {
             Name = name;

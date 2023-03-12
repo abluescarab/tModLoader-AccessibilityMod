@@ -1,11 +1,14 @@
 ﻿Mods: {
     AccessibilityMod: {
-        InfoDisplay_Yes: Yes
-        InfoDisplay_No: No
-        InfoDisplay_Default: No information
         ModConfig_Label: Options
         MoveUp_Label: Move up
         MoveDown_Label: Move down
+
+        Info: {
+            Yes: Yes
+            No: No
+            Default: No information
+        }
 
         Panel: {
             PanelOptions_Header: Panel Options
