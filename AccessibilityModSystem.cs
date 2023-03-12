@@ -10,11 +10,11 @@ namespace AccessibilityMod {
         private UserInterface modInterface;
 
         public static AccessibilityModUI UI { get; private set; }
-        public static InfoDisplays Displays { get; private set; }
+        public static AccessibilityInfoDisplays Displays { get; private set; }
 
         public override void Load() { 
             if(!Main.dedServ) {
-                Displays = new InfoDisplays();
+                Displays = new AccessibilityInfoDisplays();
                 modInterface = new UserInterface();
                 UI = new AccessibilityModUI();
 

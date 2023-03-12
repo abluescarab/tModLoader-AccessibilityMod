@@ -4,10 +4,10 @@ using System.Linq;
 using Terraria.ModLoader;
 
 namespace AccessibilityMod.UI {
-    public class InfoDisplays {
+    public class AccessibilityInfoDisplays {
         private static int nextOrder = 0;
 
-        private Dictionary<string, InfoDisplay> displays = new Dictionary<string, InfoDisplay>();
+        private Dictionary<string, AccessibilityInfo> displays = new Dictionary<string, AccessibilityInfo>();
 
         public struct Defaults {
             public const string OreTooltips = "OreTooltips";
@@ -16,7 +16,7 @@ namespace AccessibilityMod.UI {
 
         public int Count => displays.Count;
 
-        public InfoDisplays() {
+        public AccessibilityInfoDisplays() {
             Add(Defaults.OreTooltips, "Ore: {0}", 
                 () => ModContent.GetInstance<AccessibilityModConfig>().ShowOreTooltips);
             Add(Defaults.BackgroundWallAvailable, "Wall: {0}",
@@ -31,13 +31,13 @@ namespace AccessibilityMod.UI {
             displays.Remove(name);
         }
 
-        public InfoDisplay Get(string name) {
+        public AccessibilityInfo Get(string name) {
             return displays[name];
         }
 
-        public InfoDisplay[] GetAll(bool sorted = true) {
+        public AccessibilityInfo[] GetAll(bool sorted = true) {
             if(sorted) {
-                List<InfoDisplay> list = displays.Values.ToList();
+                List<AccessibilityInfo> list = displays.Values.ToList();
                 list.Sort((d1, d2) => d1.Order.CompareTo(d2.Order));
 
                 return list.ToArray();
@@ -51,14 +51,14 @@ namespace AccessibilityMod.UI {
             displays[name].SetFormattedText(text);
         }
 
-        public InfoDisplay[] GetVisible(bool sorted = true) {
+        public AccessibilityInfo[] GetVisible(bool sorted = true) {
             return GetAll(sorted).Where(d => d.IsVisible).ToArray();
         }
 
-        internal void Rearrange(InfoDisplay display, bool increment) {
+        internal void Rearrange(AccessibilityInfo display, bool increment) {
             int order = display.Order;
             int index = Array.FindIndex(GetAll(true), d => d == display);
-            InfoDisplay nextDisplay;
+            AccessibilityInfo nextDisplay;
 
             if(increment && order < Count - 1) {
                 nextDisplay = GetAll().FirstOrDefault(d => d.Order == order + 1);

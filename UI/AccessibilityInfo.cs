@@ -7,7 +7,7 @@ using Terraria.ModLoader;
 using Terraria.UI;
 
 namespace AccessibilityMod.UI {
-    public class InfoDisplay : UIElement {
+    public class AccessibilityInfo : UIElement {
         private const int ElementMargin = 5;
 
         private Func<bool> isVisible;
@@ -21,7 +21,7 @@ namespace AccessibilityMod.UI {
 
         private string translation = "Mods.AccessibilityMod.InfoDisplay_Default";
 
-        public InfoDisplay(string format, Func<bool> isVisible, int order) {
+        public AccessibilityInfo(string format, Func<bool> isVisible, int order) {
             Format = format;
             this.isVisible = isVisible;
             Order = order;

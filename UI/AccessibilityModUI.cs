@@ -31,7 +31,7 @@ namespace AccessibilityMod.UI {
         public override void Update(GameTime gameTime) {
             base.Update(gameTime);
 
-            foreach(InfoDisplay display in AccessibilityModSystem.Displays.GetAll()) {
+            foreach(AccessibilityInfo display in AccessibilityModSystem.Displays.GetAll()) {
                 display.ResetText();
             }
         }
@@ -47,7 +47,7 @@ namespace AccessibilityMod.UI {
         }
 
         public void CreateChildren() {
-            InfoDisplay[] visibleDisplays = AccessibilityModSystem.Displays.GetVisible(true);
+            AccessibilityInfo[] visibleDisplays = AccessibilityModSystem.Displays.GetVisible(true);
             int displayed = visibleDisplays.Length;
             int lineSpacing = FontAssets.MouseText.Value.LineSpacing;
             int index = 0;
@@ -60,7 +60,7 @@ namespace AccessibilityMod.UI {
                 * displayed
                 + (lineSpacing / 2), 0);
 
-            foreach(InfoDisplay display in visibleDisplays) {
+            foreach(AccessibilityInfo display in visibleDisplays) {
                 display.Left.Set(0, 0);
                 display.Top.Set(lineSpacing * index++, 0);
                 Panel.Append(display);
@@ -81,14 +81,14 @@ namespace AccessibilityMod.UI {
                 return;
             }
 
-            AccessibilityModSystem.Displays.SetText(InfoDisplays.Defaults.OreTooltips, 
+            AccessibilityModSystem.Displays.SetText(AccessibilityInfoDisplays.Defaults.OreTooltips, 
                 TileID.Search.GetName(type));
         }
 
         public void ShowBackgroundWallAvailable() {
             Tile tile = Main.tile[Player.tileTargetX, Player.tileTargetY];
 
-            AccessibilityModSystem.Displays.SetText(InfoDisplays.Defaults.BackgroundWallAvailable,
+            AccessibilityModSystem.Displays.SetText(AccessibilityInfoDisplays.Defaults.BackgroundWallAvailable,
                 tile.WallType > 0
                 ? Language.GetTextValue("Mods.AccessibilityMod.Yes")
                 : Language.GetTextValue("Mods.AccessibilityMod.No"));
