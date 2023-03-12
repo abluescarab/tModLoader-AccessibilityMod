@@ -1,7 +1,5 @@
 ﻿using CustomSlot.UI;
 using Microsoft.Xna.Framework;
-using System.Collections.Generic;
-using System.Linq;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.ID;
@@ -9,7 +7,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
 
-namespace AccessibilityMod {
+namespace AccessibilityMod.UI {
     public class AccessibilityModUI : UIState {
         public enum DisplayType {
             OreTooltips,
@@ -17,20 +15,10 @@ namespace AccessibilityMod {
         }
 
         public DraggableUIPanel Panel { get; private set; }
-        public Dictionary<DisplayType, InfoDisplay> InfoElements { get; private set; }
         public bool IsVisible { get; set; }
         public static Vector2 DefaultCoordinates => new Vector2(0, 20);
 
-        private AccessibilityModConfig config;
-
         public override void OnInitialize() {
-            config = ModContent.GetInstance<AccessibilityModConfig>();
-
-            InfoElements = new Dictionary<DisplayType, InfoDisplay>() {
-                { DisplayType.OreTooltips, new("Ore: {0}", () => config.ShowOreTooltips) },
-                { DisplayType.BackgroundWallAvailable, new("Wall: {0}", () => config.ShowBackgroundWallAvailable) }
-            };
-
             Panel = new DraggableUIPanel();
             Panel.HAlign = 0.5f;
             CheckVisibility();
@@ -47,7 +35,7 @@ namespace AccessibilityMod {
         public override void Update(GameTime gameTime) {
             base.Update(gameTime);
 
-            foreach(InfoDisplay display in InfoElements.Values) {
+            foreach(InfoDisplay display in InfoDisplays.GetAll()) {
                 display.ResetText();
             }
         }
@@ -63,9 +51,8 @@ namespace AccessibilityMod {
         }
 
         public void CheckVisibility() {
-            IEnumerable<InfoDisplay> visibleDisplays 
-                = InfoElements.Values.Where(i => i.IsVisible);
-            int displayed = visibleDisplays.Count();
+            InfoDisplay[] visibleDisplays = InfoDisplays.GetVisible();
+            int displayed = visibleDisplays.Length;
             int lineSpacing = FontAssets.MouseText.Value.LineSpacing;
             int index = 0;
 
@@ -92,24 +79,21 @@ namespace AccessibilityMod {
         }
 
         public void ShowOreTooltip(int type, bool longRange) {
-            if(!config.ShowOreTooltips 
-                || (longRange && !config.EnableLongRangeTooltips)) {
+            AccessibilityModConfig config = ModContent.GetInstance<AccessibilityModConfig>();
+
+            if(longRange && !config.EnableLongRangeTooltips) {
                 return;
             }
 
-            InfoElements[DisplayType.OreTooltips].SetFormattedText(TileID.Search.GetName(type));
+            InfoDisplays.SetText(InfoDisplays.OreTooltips, TileID.Search.GetName(type));
         }
 
         public void ShowBackgroundWallAvailable() {
-            if(!config.ShowBackgroundWallAvailable) {
-                return;
-            }
-
             Tile tile = Main.tile[Player.tileTargetX, Player.tileTargetY];
 
-            InfoElements[DisplayType.BackgroundWallAvailable].SetFormattedText(
-                tile.WallType > 0 
-                ? Language.GetTextValue("Mods.AccessibilityMod.Yes") 
+            InfoDisplays.SetText(InfoDisplays.BackgroundWallAvailable,
+                tile.WallType > 0
+                ? Language.GetTextValue("Mods.AccessibilityMod.Yes")
                 : Language.GetTextValue("Mods.AccessibilityMod.No"));
         }
     }

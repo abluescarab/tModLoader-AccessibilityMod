@@ -5,7 +5,7 @@ using Terraria.GameContent.UI.Elements;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
-namespace AccessibilityMod {
+namespace AccessibilityMod.UI {
     public class InfoDisplay : UIText {
         private Func<bool> isVisible;
 
@@ -15,7 +15,6 @@ namespace AccessibilityMod {
         private string translation = "Mods.AccessibilityMod.InfoDisplay_Default";
 
         public InfoDisplay(string format, Func<bool> isVisible) : base("", 1, false) {
-            Name = name;
             Format = format;
             this.isVisible = isVisible;
             TextColor = ModContent.GetInstance<AccessibilityModConfig>().PanelTextColor;

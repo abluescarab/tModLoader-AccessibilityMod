@@ -1,4 +1,5 @@
-﻿using CustomSlot;
+﻿using AccessibilityMod.UI;
+using CustomSlot;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;

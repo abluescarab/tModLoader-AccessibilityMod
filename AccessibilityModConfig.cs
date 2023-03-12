@@ -1,6 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using AccessibilityMod.UI;
+using Microsoft.Xna.Framework;
 using System.ComponentModel;
-using Terraria.GameContent.UI.Elements;
 using Terraria.ModLoader.Config;
 
 namespace AccessibilityMod {
@@ -59,8 +59,8 @@ namespace AccessibilityMod {
             AccessibilityModSystem.UI.Panel.BackgroundColor = PanelBackgroundColor;
             AccessibilityModSystem.UI.Panel.BorderColor = PanelBorderColor;
 
-            foreach(UIText text in AccessibilityModSystem.UI.InfoElements.Values) {
-                text.TextColor = PanelTextColor;
+            foreach(InfoDisplay display in InfoDisplays.GetAll()) {
+                display.TextColor = PanelTextColor;
             }
 
             if(ResetPanelLocation) {
