@@ -4,3 +4,4 @@
 ## Features
 * Show ore type under mouse cursor
 * Show whether a wall is available under the mouse cursor
+* Show whether the tile under the mouse hover can be grappled to
