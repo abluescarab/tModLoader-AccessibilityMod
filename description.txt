@@ -3,8 +3,8 @@ Accessibility Mod adds a draggable panel with information about the tile under t
 Have another accessibility idea? Leave a comment or open an issue on the GitHub!
 
 Features:
-* Show ore type under mouse cursor
+* Show ore type under the mouse cursor
 * Show whether a wall is available under the mouse cursor
 
 [Changelog]
-v1.0.0  2023-03-11
+v1.0.0  2023-03-12
