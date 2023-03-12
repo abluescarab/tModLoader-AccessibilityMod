@@ -13,7 +13,7 @@ namespace AccessibilityMod.UI {
         private Func<bool> isVisible;
 
         public UIText TextElement;
-        public UIUpDownButton ChangeOrderButton;
+        public UISplitButton ChangeOrderButton;
 
         public string Name { get; }
         public string Format { get; }
@@ -29,7 +29,9 @@ namespace AccessibilityMod.UI {
             Order = order;
 
             AccessibilityModConfig config = ModContent.GetInstance<AccessibilityModConfig>();
-            ChangeOrderButton = new UIUpDownButton();
+            ChangeOrderButton = new UISplitButton(
+                Language.GetTextValue("Mods.AccessibilityMod.MoveUp_Label"),
+                Language.GetTextValue("Mods.AccessibilityMod.MoveDown_Label"));
 
             ChangeOrderButton.Left.Set(0, 0);
             ChangeOrderButton.Top.Set(0, 0);
