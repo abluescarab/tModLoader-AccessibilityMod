@@ -2,21 +2,13 @@
 using Terraria.GameContent.UI.Elements;
 using Terraria.Localization;
 using Terraria.ModLoader;
-using static AccessibilityMod.AccessibilityModConfig;
 
 namespace AccessibilityMod {
     public class InfoDisplay : UIText {
         public bool Visible { get; set; }
         public string Format { get; set; }
-        public Vector2 Position {
-            get {
-                return GetOuterDimensions().Position();
-            }
-            set {
-                Left.Set(value.X, 0);
-                Top.Set(value.Y, 0);
-            }
-        }
+
+        private string translation = "Mods.AccessibilityMod.InfoDisplay_Default";
 
         public InfoDisplay(bool visible, string format) : base("", 1, false) {
             Visible = visible;
@@ -30,8 +22,7 @@ namespace AccessibilityMod {
         }
 
         public void ResetText() {
-            SetText(string.Format(Format, 
-                Language.GetTextValue("Mods.AccessibilityMod.InfoDisplay_Default")));
+            SetText(string.Format(Format, Language.GetTextValue(translation)));
         }
 
         public override void Update(GameTime gameTime) {
@@ -41,7 +32,8 @@ namespace AccessibilityMod {
 
             base.Update(gameTime);
 
-            if(Parent.MinWidth.Pixels < MinWidth.Pixels) {
+            if(!Text.Contains(translation) 
+                && Parent.MinWidth.Pixels < MinWidth.Pixels) {
                 AccessibilityModSystem.UI.SetMinWidth(MinWidth);
             }
         }
