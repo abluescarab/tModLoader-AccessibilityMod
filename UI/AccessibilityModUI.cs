@@ -9,33 +9,29 @@ using Terraria.UI;
 
 namespace AccessibilityMod.UI {
     public class AccessibilityModUI : UIState {
-        public enum DisplayType {
-            OreTooltips,
-            BackgroundWallAvailable
-        }
-
         public DraggableUIPanel Panel { get; private set; }
-        public bool IsVisible { get; set; }
+        public bool IsVisible { get; set; } = true;
         public static Vector2 DefaultCoordinates => new Vector2(0, 20);
 
         public override void OnInitialize() {
             Panel = new DraggableUIPanel();
+
             Panel.HAlign = 0.5f;
-            CheckVisibility();
+            CreateChildren();
 
             Append(Panel);
         }
 
         public void SetMinWidth(StyleDimension minWidth) {
             Panel.MinWidth = new StyleDimension(
-                minWidth.Pixels + Panel.PaddingLeft + Panel.PaddingRight * 2,
+                minWidth.Pixels + Panel.PaddingLeft * 2 + Panel.PaddingRight * 2,
                 minWidth.Precent);
         }
 
         public override void Update(GameTime gameTime) {
             base.Update(gameTime);
 
-            foreach(InfoDisplay display in InfoDisplays.GetAll()) {
+            foreach(InfoDisplay display in AccessibilityModSystem.Displays.GetAll()) {
                 display.ResetText();
             }
         }
@@ -50,8 +46,8 @@ namespace AccessibilityMod.UI {
             Panel.Top.Set(y, 0);
         }
 
-        public void CheckVisibility() {
-            InfoDisplay[] visibleDisplays = InfoDisplays.GetVisible();
+        public void CreateChildren() {
+            InfoDisplay[] visibleDisplays = AccessibilityModSystem.Displays.GetVisible(true);
             int displayed = visibleDisplays.Length;
             int lineSpacing = FontAssets.MouseText.Value.LineSpacing;
             int index = 0;
@@ -85,14 +81,14 @@ namespace AccessibilityMod.UI {
                 return;
             }
 
-            InfoDisplays.SetText(InfoDisplays.Defaults.OreTooltips, 
+            AccessibilityModSystem.Displays.SetText(InfoDisplays.Defaults.OreTooltips, 
                 TileID.Search.GetName(type));
         }
 
         public void ShowBackgroundWallAvailable() {
             Tile tile = Main.tile[Player.tileTargetX, Player.tileTargetY];
 
-            InfoDisplays.SetText(InfoDisplays.Defaults.BackgroundWallAvailable,
+            AccessibilityModSystem.Displays.SetText(InfoDisplays.Defaults.BackgroundWallAvailable,
                 tile.WallType > 0
                 ? Language.GetTextValue("Mods.AccessibilityMod.Yes")
                 : Language.GetTextValue("Mods.AccessibilityMod.No"));

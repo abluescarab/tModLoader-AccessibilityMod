@@ -7,11 +7,14 @@ using Terraria.UI;
 
 namespace AccessibilityMod {
     public class AccessibilityModSystem : ModSystem {
-        public static AccessibilityModUI UI;
         private UserInterface modInterface;
 
-        public override void Load() {
+        public static AccessibilityModUI UI { get; private set; }
+        public static InfoDisplays Displays { get; private set; }
+
+        public override void Load() { 
             if(!Main.dedServ) {
+                Displays = new InfoDisplays();
                 modInterface = new UserInterface();
                 UI = new AccessibilityModUI();
 
@@ -31,7 +34,7 @@ namespace AccessibilityMod {
         }
 
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers) {
-            int inventoryLayer = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Inventory"));
+            int inventoryLayer = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Mouse Text"));
 
             if(inventoryLayer != -1) {
                 layers.Insert(

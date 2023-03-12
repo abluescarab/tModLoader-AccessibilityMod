@@ -25,6 +25,10 @@ namespace AccessibilityMod {
         public bool ShowBackgroundWallAvailable;
 
         [Header("$Mods.AccessibilityMod.Panel.PanelOptions_Header")]
+        [Label("$Mods.AccessibilityMod.Panel.ShowReorderButtons_Label")]
+        [Tooltip("$Mods.AccessibilityMod.Panel.ShowReorderButtons_Tooltip")]
+        public bool ShowReorderButtons;
+
         [DefaultValue(true)]
         [Label("$Mods.AccessibilityMod.Panel.AllowDraggingPanel_Label")]
         [Tooltip("$Mods.AccessibilityMod.Panel.AllowDraggingPanel_Tooltip")]
@@ -59,8 +63,9 @@ namespace AccessibilityMod {
             AccessibilityModSystem.UI.Panel.BackgroundColor = PanelBackgroundColor;
             AccessibilityModSystem.UI.Panel.BorderColor = PanelBorderColor;
 
-            foreach(InfoDisplay display in InfoDisplays.GetAll()) {
-                display.TextColor = PanelTextColor;
+            foreach(InfoDisplay display in AccessibilityModSystem.Displays.GetAll()) {
+                display.TextElement.TextColor = PanelTextColor;
+                display.ChangeAppearance(ShowReorderButtons);
             }
 
             if(ResetPanelLocation) {
@@ -68,7 +73,7 @@ namespace AccessibilityMod {
                 ResetPanelLocation = false;
             }
 
-            AccessibilityModSystem.UI.CheckVisibility();
+            AccessibilityModSystem.UI.CreateChildren();
         }
     }
 }

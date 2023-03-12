@@ -4,29 +4,76 @@ using System;
 using Terraria.GameContent.UI.Elements;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using Terraria.UI;
 
 namespace AccessibilityMod.UI {
-    public class InfoDisplay : UIText {
+    public class InfoDisplay : UIElement {
+        private const int ElementMargin = 5;
+
         private Func<bool> isVisible;
 
+        public UIText TextElement;
+        public UIUpDownButton ChangeOrderButton;
+        
         public string Format { get; set; }
+        public int Order { get; set; }
         public bool IsVisible => isVisible();
 
         private string translation = "Mods.AccessibilityMod.InfoDisplay_Default";
 
-        public InfoDisplay(string format, Func<bool> isVisible) : base("", 1, false) {
+        public InfoDisplay(string format, Func<bool> isVisible, int order) {
             Format = format;
             this.isVisible = isVisible;
-            TextColor = ModContent.GetInstance<AccessibilityModConfig>().PanelTextColor;
-            ResetText();
+            Order = order;
+
+            AccessibilityModConfig config = ModContent.GetInstance<AccessibilityModConfig>();
+            ChangeOrderButton = new UIUpDownButton();
+
+            ChangeOrderButton.Left.Set(0, 0);
+            ChangeOrderButton.Top.Set(0, 0);
+            ChangeOrderButton.OnClickUpButton += MoveUp;
+            ChangeOrderButton.OnClickDownButton += MoveDown;
+
+            TextElement = new UIText("");
+
+            TextElement.VAlign = 0.5f;
+            TextElement.Top.Set(0, 0);
+            TextElement.TextColor = config.PanelTextColor;
+
+            ChangeAppearance(config.ShowReorderButtons);
+        }
+
+        private void MoveUp(UIMouseEvent evt, UIElement listeningElement) {
+            AccessibilityModSystem.Displays.Rearrange(this, false);
+        }
+
+        private void MoveDown(UIMouseEvent evt, UIElement listeningElement) {
+            AccessibilityModSystem.Displays.Rearrange(this, true);
+        }
+
+        public void ChangeAppearance(bool showReorderButtons) {
+            RemoveAllChildren();
+
+            if(showReorderButtons) {
+                TextElement.Left.Set(ChangeOrderButton.Width.Pixels + ElementMargin, 0);
+                Append(ChangeOrderButton);
+            }
+            else {
+                TextElement.Left.Set(0, 0);
+            }
+
+            Append(TextElement);
+
+            Height.Set(ChangeOrderButton.Height.Pixels, 0);
+            Width.Set(ChangeOrderButton.Width.Pixels, 0);
         }
 
         public void SetFormattedText(string text) {
-            SetText(string.Format(Format, text));
+            TextElement.SetText(string.Format(Format, text));
         }
 
         public void ResetText() {
-            SetText(string.Format(Format, Language.GetTextValue(translation)));
+            TextElement.SetText(string.Format(Format, Language.GetTextValue(translation)));
         }
 
         public override void Update(GameTime gameTime) {
@@ -36,9 +83,17 @@ namespace AccessibilityMod.UI {
 
             base.Update(gameTime);
 
-            if(!Text.Contains(translation) 
-                && Parent.MinWidth.Pixels < MinWidth.Pixels) {
-                AccessibilityModSystem.UI.SetMinWidth(MinWidth);
+            if(!TextElement.Text.Contains(translation)) {
+                float textWidth = TextElement.MinWidth.Pixels;
+                float buttonWidth = ChangeOrderButton.Width.Pixels;
+
+                if(MinWidth.Pixels < textWidth + buttonWidth) {
+                    MinWidth = new StyleDimension(textWidth + buttonWidth + ElementMargin, 0);
+                }
+
+                if(Parent.MinWidth.Pixels < TextElement.MinWidth.Pixels) {
+                    AccessibilityModSystem.UI.SetMinWidth(TextElement.MinWidth);
+                }
             }
         }
 

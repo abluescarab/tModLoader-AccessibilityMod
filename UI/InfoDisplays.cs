@@ -4,50 +4,74 @@ using System.Linq;
 using Terraria.ModLoader;
 
 namespace AccessibilityMod.UI {
-    internal struct InfoDisplays {
-        private static Dictionary<string, InfoDisplay> displays 
-            = new Dictionary<string, InfoDisplay>() {
-                {
-                    Defaults.OreTooltips,
-                    new("Ore: {0}", 
-                        () => ModContent.GetInstance<AccessibilityModConfig>()
-                        .ShowOreTooltips)
-                },
-                {
-                    Defaults.BackgroundWallAvailable,
-                    new("Wall: {0}", 
-                        () => ModContent.GetInstance<AccessibilityModConfig>()
-                        .ShowBackgroundWallAvailable)
-                }
-            };
+    public class InfoDisplays {
+        private static int nextOrder = 0;
+
+        private Dictionary<string, InfoDisplay> displays = new Dictionary<string, InfoDisplay>();
 
         public struct Defaults {
             public const string OreTooltips = "OreTooltips";
             public const string BackgroundWallAvailable = "BackgroundWallAvailable";
         }
 
-        public static void Add(string name, string format, Func<bool> isVisible) {
-            displays.Add(name, new(format, isVisible));
+        public int Count => displays.Count;
+
+        public InfoDisplays() {
+            Add(Defaults.OreTooltips, "Ore: {0}", 
+                () => ModContent.GetInstance<AccessibilityModConfig>().ShowOreTooltips);
+            Add(Defaults.BackgroundWallAvailable, "Wall: {0}",
+                () => ModContent.GetInstance<AccessibilityModConfig>().ShowBackgroundWallAvailable);
         }
 
-        public static void Remove(string name) {
+        public void Add(string name, string format, Func<bool> isVisible) {
+            displays.Add(name, new(format, isVisible, nextOrder++));
+        }
+
+        public void Remove(string name) {
             displays.Remove(name);
         }
 
-        public static InfoDisplay Get(string name) {
+        public InfoDisplay Get(string name) {
             return displays[name];
         }
 
-        public static InfoDisplay[] GetAll() {
-            return displays.Values.ToArray();
+        public InfoDisplay[] GetAll(bool sorted = true) {
+            if(sorted) {
+                List<InfoDisplay> list = displays.Values.ToList();
+                list.Sort((d1, d2) => d1.Order.CompareTo(d2.Order));
+
+                return list.ToArray();
+            }
+            else {
+                return displays.Values.ToArray();
+            }
         }
 
-        public static void SetText(string name, string text) {
+        public void SetText(string name, string text) {
             displays[name].SetFormattedText(text);
         }
 
-        public static InfoDisplay[] GetVisible() {
-            return displays.Values.Where(d => d.IsVisible).ToArray();
+        public InfoDisplay[] GetVisible(bool sorted = true) {
+            return GetAll(sorted).Where(d => d.IsVisible).ToArray();
+        }
+
+        internal void Rearrange(InfoDisplay display, bool increment) {
+            int order = display.Order;
+            int index = Array.FindIndex(GetAll(true), d => d == display);
+            InfoDisplay nextDisplay;
+
+            if(increment && order < Count - 1) {
+                nextDisplay = GetAll().FirstOrDefault(d => d.Order == order + 1);
+                nextDisplay.Order--;
+                display.Order++;
+            }
+            else if(!increment && order > 0) {
+                nextDisplay = GetAll().FirstOrDefault(d => d.Order == order - 1);
+                nextDisplay.Order++;
+                display.Order--;
+            }
+
+            AccessibilityModSystem.UI.CreateChildren();
         }
     }
 }
