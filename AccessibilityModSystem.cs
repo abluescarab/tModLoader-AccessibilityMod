@@ -34,7 +34,7 @@ namespace AccessibilityMod {
         }
 
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers) {
-            int inventoryLayer = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Mouse Text"));
+            int inventoryLayer = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Inventory"));
 
             if(inventoryLayer != -1) {
                 layers.Insert(
