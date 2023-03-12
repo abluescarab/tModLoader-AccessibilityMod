@@ -1,5 +1,4 @@
-﻿using CustomSlot.UI;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using System.ComponentModel;
 using Terraria.GameContent.UI.Elements;
 using Terraria.ModLoader.Config;
@@ -31,6 +30,11 @@ namespace AccessibilityMod {
         [Tooltip("$Mods.AccessibilityMod.Panel.AllowDraggingPanel_Tooltip")]
         public bool AllowDraggingPanel;
 
+        [DefaultValue(false)]
+        [Label("$Mods.AccessibilityMod.Panel.ResetPanelLocation_Label")]
+        [Tooltip("$Mods.AccessibilityMod.Panel.ResetPanelLocation_Tooltip")]
+        public bool ResetPanelLocation;
+
         [Label("$Mods.AccessibilityMod.Panel.PanelBackgroundColor_Label")]
         [DefaultValue(typeof(Color), "44, 57, 105, 178")]
         [ColorNoAlpha]
@@ -57,6 +61,11 @@ namespace AccessibilityMod {
 
             foreach(UIText text in AccessibilityModSystem.UI.InfoElements.Values) {
                 text.TextColor = PanelTextColor;
+            }
+
+            if(ResetPanelLocation) {
+                AccessibilityModSystem.UI.ResetPosition();
+                ResetPanelLocation = false;
             }
         }
     }

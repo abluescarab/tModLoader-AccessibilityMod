@@ -17,7 +17,8 @@ namespace AccessibilityMod {
 
         public DraggableUIPanel Panel { get; private set; }
         public Dictionary<DisplayType, InfoDisplay> InfoElements { get; private set; }
-        
+        public static Vector2 DefaultCoordinates => new Vector2(0, 20);
+
         private AccessibilityModConfig config;
 
         public override void OnInitialize() {
@@ -32,8 +33,7 @@ namespace AccessibilityMod {
 
             int lineSpacing = FontAssets.MouseText.Value.LineSpacing;
 
-            Panel.Left.Set(500, 0);
-            Panel.Top.Set(500, 0);
+            Panel.HAlign = 0.5f;
             Panel.MinWidth.Set(0, 0);
             Panel.Height.Set(lineSpacing * InfoElements.Count + (lineSpacing / 2), 0);
 
@@ -60,6 +60,16 @@ namespace AccessibilityMod {
             foreach(InfoDisplay display in InfoElements.Values) {
                 display.ResetText();
             }
+        }
+
+        public void ResetPosition() {
+            Panel.Left.Set(DefaultCoordinates.X, 0);
+            Panel.Top.Set(DefaultCoordinates.Y, 0);
+        }
+
+        public void SetPosition(float x, float y) {
+            Panel.Left.Set(x, 0);
+            Panel.Top.Set(y, 0);
         }
 
         public void ShowOreTooltip(int type, bool longRange) {

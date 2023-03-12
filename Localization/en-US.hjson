@@ -8,13 +8,15 @@
         Panel: {
             PanelOptions_Header: Panel Options
 
-            PanelBackgroundOpacity_Label: Panel background opacity
-
             AllowDraggingPanel_Label: Allow dragging panel
             AllowDraggingPanel_Tooltip: Allow dragging the information panel around the screen
+
             PanelBackgroundColor_Label: Panel background color
             PanelBorderColor_Label: Panel border color
             PanelTextColor_Label: Panel text color
+
+            ResetPanelLocation_Label: Reset panel location
+            ResetPanelLocation_Tooltip: Only works when loaded into a world
         }
         
         Tooltips: {
