@@ -78,7 +78,8 @@ namespace AccessibilityMod.UI {
         public void ShowOreTooltip(int type, bool longRange) {
             AccessibilityModConfig config = ModContent.GetInstance<AccessibilityModConfig>();
 
-            if(longRange && !config.EnableLongRangeTooltips) {
+            if(!config.ShowOreTooltips ||
+                (longRange && !config.EnableLongRangeTooltips)) {
                 return;
             }
 
@@ -87,6 +88,12 @@ namespace AccessibilityMod.UI {
         }
 
         public void ShowBackgroundWallAvailable() {
+            AccessibilityModConfig config = ModContent.GetInstance<AccessibilityModConfig>();
+
+            if(!config.ShowBackgroundWallAvailable) {
+                return;
+            }
+
             Tile tile = Main.tile[Player.tileTargetX, Player.tileTargetY];
 
             AccessibilityModSystem.Displays.SetText(AccessibilityDisplays.Defaults.BackgroundWallAvailable,
@@ -96,6 +103,12 @@ namespace AccessibilityMod.UI {
         }
 
         public void ShowCanGrappleTo() {
+            AccessibilityModConfig config = ModContent.GetInstance<AccessibilityModConfig>();
+
+            if(!config.ShowCanGrappleTo) {
+                return;
+            }
+
             bool canGrapple = true;
 
             Item item = Main.CurrentPlayer.QuickGrapple_GetItemToUse();
