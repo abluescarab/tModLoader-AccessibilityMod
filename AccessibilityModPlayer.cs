@@ -14,11 +14,21 @@ namespace AccessibilityMod {
         public override void LoadData(TagCompound tag) {
             panelX.Value = tag.GetFloat(panelX.Tag);
             panelY.Value = tag.GetFloat(panelY.Tag);
+
+            foreach(AccessibilityDisplay display in AccessibilityModSystem.Displays.GetAll()) {
+                if(tag.TryGet(display.Name, out int order)) {
+                    display.Order = tag.GetInt(display.Name);
+                }
+            }
         }
 
         public override void SaveData(TagCompound tag) {
             tag.Add(panelX.Tag, AccessibilityModSystem.UI.Panel.Left.Pixels);
             tag.Add(panelY.Tag, AccessibilityModSystem.UI.Panel.Top.Pixels);
+
+            foreach(AccessibilityDisplay display in AccessibilityModSystem.Displays.GetAll()) {
+                tag.Add(display.Name, display.Order);
+            }
         }
 
         public override void OnEnterWorld(Player player) {
