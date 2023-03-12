@@ -27,8 +27,8 @@ namespace AccessibilityMod {
             config = ModContent.GetInstance<AccessibilityModConfig>();
 
             InfoElements = new Dictionary<DisplayType, InfoDisplay>() {
-                { DisplayType.OreTooltips, new(() => config.ShowOreTooltips, "Ore: {0}") },
-                { DisplayType.BackgroundWallAvailable, new(() => config.ShowBackgroundWallAvailable, "Wall: {0}") }
+                { DisplayType.OreTooltips, new("Ore: {0}", () => config.ShowOreTooltips) },
+                { DisplayType.BackgroundWallAvailable, new("Wall: {0}", () => config.ShowBackgroundWallAvailable) }
             };
 
             Panel = new DraggableUIPanel();

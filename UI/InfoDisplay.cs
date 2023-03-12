@@ -14,9 +14,10 @@ namespace AccessibilityMod {
 
         private string translation = "Mods.AccessibilityMod.InfoDisplay_Default";
 
-        public InfoDisplay(Func<bool> isVisible, string format) : base("", 1, false) {
-            this.isVisible = isVisible;
+        public InfoDisplay(string format, Func<bool> isVisible) : base("", 1, false) {
+            Name = name;
             Format = format;
+            this.isVisible = isVisible;
             TextColor = ModContent.GetInstance<AccessibilityModConfig>().PanelTextColor;
             ResetText();
         }
