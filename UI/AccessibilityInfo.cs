@@ -15,13 +15,15 @@ namespace AccessibilityMod.UI {
         public UIText TextElement;
         public UIUpDownButton ChangeOrderButton;
         
-        public string Format { get; set; }
+        public string Name { get; }
+        public string Format { get; }
         public int Order { get; set; }
         public bool IsVisible => isVisible();
 
         private string translation = "Mods.AccessibilityMod.InfoDisplay_Default";
 
-        public AccessibilityInfo(string format, Func<bool> isVisible, int order) {
+        public AccessibilityInfo(string name, string format, Func<bool> isVisible, int order) {
+            Name = name;
             Format = format;
             this.isVisible = isVisible;
             Order = order;

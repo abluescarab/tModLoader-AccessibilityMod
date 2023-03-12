@@ -24,7 +24,7 @@ namespace AccessibilityMod.UI {
         }
 
         public void Add(string name, string format, Func<bool> isVisible) {
-            displays.Add(name, new(format, isVisible, nextOrder++));
+            displays.Add(name, new(name, format, isVisible, nextOrder++));
         }
 
         public void Remove(string name) {
@@ -69,6 +69,9 @@ namespace AccessibilityMod.UI {
                 nextDisplay = GetAll().FirstOrDefault(d => d.Order == order - 1);
                 nextDisplay.Order++;
                 display.Order--;
+            }
+            else {
+                return;
             }
 
             AccessibilityModSystem.UI.CreateChildren();
