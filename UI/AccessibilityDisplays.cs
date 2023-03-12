@@ -7,21 +7,26 @@ namespace AccessibilityMod.UI {
     public class AccessibilityDisplays {
         private static int nextOrder = 0;
 
-        private Dictionary<string, AccessibilityDisplay> displays
+        private readonly Dictionary<string, AccessibilityDisplay> displays
             = new Dictionary<string, AccessibilityDisplay>();
 
         public struct Defaults {
             public const string OreTooltips = "OreTooltips";
             public const string BackgroundWallAvailable = "BackgroundWallAvailable";
+            public const string CanGrappleTo = "CanGrappleTo";
         }
 
         public int Count => displays.Count;
 
         public AccessibilityDisplays() {
+            AccessibilityModConfig config = ModContent.GetInstance<AccessibilityModConfig>();
+
             Add(Defaults.OreTooltips, "Ore: {0}",
-                () => ModContent.GetInstance<AccessibilityModConfig>().ShowOreTooltips);
+                () => config.ShowOreTooltips);
             Add(Defaults.BackgroundWallAvailable, "Wall: {0}",
-                () => ModContent.GetInstance<AccessibilityModConfig>().ShowBackgroundWallAvailable);
+                () => config.ShowBackgroundWallAvailable);
+            Add(Defaults.CanGrappleTo, "Grapple: {0}",
+                () => config.ShowCanGrappleTo);
         }
 
         public void Add(string name, string format, Func<bool> isVisible) {

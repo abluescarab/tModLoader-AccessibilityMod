@@ -30,14 +30,17 @@
         Tooltips: {
             TooltipOptions_Header: Tooltip Options
 
+            EnableLongRangeTooltips_Label: Enable long-range tooltips
+            EnableLongRangeTooltips_Tooltip: Display tooltips when the tile is hovered over, regardless of distance from the player
+
             ShowOreTooltips_Label: Show ore tooltips
             ShowOreTooltips_Tooltip: Display a tooltip when hovering over an ore vein in the environment
 
             ShowBackgroundWallAvailable_Label: Show background wall availability
             ShowBackgroundWallAvailable_Tooltip: Display a tooltip showing whether a background wall is available under your mouse cursor
 
-            EnableLongRangeTooltips_Label: Enable long-range tooltips
-            EnableLongRangeTooltips_Tooltip: Display tooltips when the tile is hovered over, regardless of distance from the player
+            ShowCanGrappleTo_Label: Show grapple distance
+            ShowCanGrappleTo_Tooltip: Display a tooltip showing whether the hovered tile can be grappled to
         }
     }
 }

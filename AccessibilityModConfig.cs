@@ -24,6 +24,11 @@ namespace AccessibilityMod {
         [Tooltip("$Mods.AccessibilityMod.Tooltips.ShowBackgroundWallAvailable_Tooltip")]
         public bool ShowBackgroundWallAvailable;
 
+        [DefaultValue(true)]
+        [Label("$Mods.AccessibilityMod.Tooltips.ShowCanGrappleTo_Label")]
+        [Tooltip("$Mods.AccessibilityMod.Tooltips.ShowCanGrappleTo_Tooltip")]
+        public bool ShowCanGrappleTo;
+
         [Header("$Mods.AccessibilityMod.Panel.PanelOptions_Header")]
         [Label("$Mods.AccessibilityMod.Panel.ShowReorderButtons_Label")]
         [Tooltip("$Mods.AccessibilityMod.Panel.ShowReorderButtons_Tooltip")]

@@ -37,6 +37,7 @@ namespace AccessibilityMod {
 
         public override void PostUpdate() {
             AccessibilityModSystem.UI.ShowBackgroundWallAvailable();
+            AccessibilityModSystem.UI.ShowCanGrappleTo();
         }
     }
 }
