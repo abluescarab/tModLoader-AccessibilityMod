@@ -1,17 +1,21 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
 using Terraria.GameContent.UI.Elements;
 using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace AccessibilityMod {
     public class InfoDisplay : UIText {
-        public bool Visible { get; set; }
+        private Func<bool> isVisible;
+
         public string Format { get; set; }
+        public bool IsVisible => isVisible();
 
         private string translation = "Mods.AccessibilityMod.InfoDisplay_Default";
 
-        public InfoDisplay(bool visible, string format) : base("", 1, false) {
-            Visible = visible;
+        public InfoDisplay(Func<bool> isVisible, string format) : base("", 1, false) {
+            this.isVisible = isVisible;
             Format = format;
             TextColor = ModContent.GetInstance<AccessibilityModConfig>().PanelTextColor;
             ResetText();
@@ -26,7 +30,7 @@ namespace AccessibilityMod {
         }
 
         public override void Update(GameTime gameTime) {
-            if(!Visible) {
+            if(!IsVisible) {
                 return;
             }
 
@@ -36,6 +40,14 @@ namespace AccessibilityMod {
                 && Parent.MinWidth.Pixels < MinWidth.Pixels) {
                 AccessibilityModSystem.UI.SetMinWidth(MinWidth);
             }
+        }
+
+        protected override void DrawSelf(SpriteBatch spriteBatch) {
+            if(!IsVisible) {
+                return;
+            }
+
+            base.DrawSelf(spriteBatch);
         }
     }
 }
