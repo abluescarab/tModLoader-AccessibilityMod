@@ -9,6 +9,11 @@ namespace AccessibilityMod {
         public override ConfigScope Mode => ConfigScope.ClientSide;
 
         [Header("$Mods.AccessibilityMod.Tooltips.TooltipOptions_Header")]
+        [DefaultValue(false)]
+        [Label("$Mods.AccessibilityMod.Tooltips.EnableLongRangeTooltips_Label")]
+        [Tooltip("$Mods.AccessibilityMod.Tooltips.EnableLongRangeTooltips_Tooltip")]
+        public bool EnableLongRangeTooltips;
+
         [DefaultValue(true)]
         [Label("$Mods.AccessibilityMod.Tooltips.ShowOreTooltips_Label")]
         [Tooltip("$Mods.AccessibilityMod.Tooltips.ShowOreTooltips_Tooltip")]
@@ -18,11 +23,6 @@ namespace AccessibilityMod {
         [Label("$Mods.AccessibilityMod.Tooltips.ShowBackgroundWallAvailable_Label")]
         [Tooltip("$Mods.AccessibilityMod.Tooltips.ShowBackgroundWallAvailable_Tooltip")]
         public bool ShowBackgroundWallAvailable;
-
-        [DefaultValue(false)]
-        [Label("$Mods.AccessibilityMod.Tooltips.EnableLongRangeTooltips_Label")]
-        [Tooltip("$Mods.AccessibilityMod.Tooltips.EnableLongRangeTooltips_Tooltip")]
-        public bool EnableLongRangeTooltips;
 
         [Header("$Mods.AccessibilityMod.Panel.PanelOptions_Header")]
         [DefaultValue(true)]
