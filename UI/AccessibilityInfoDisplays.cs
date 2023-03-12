@@ -7,7 +7,8 @@ namespace AccessibilityMod.UI {
     public class AccessibilityInfoDisplays {
         private static int nextOrder = 0;
 
-        private Dictionary<string, AccessibilityInfo> displays = new Dictionary<string, AccessibilityInfo>();
+        private Dictionary<string, AccessibilityDisplay> displays
+            = new Dictionary<string, AccessibilityDisplay>();
 
         public struct Defaults {
             public const string OreTooltips = "OreTooltips";
@@ -17,7 +18,7 @@ namespace AccessibilityMod.UI {
         public int Count => displays.Count;
 
         public AccessibilityInfoDisplays() {
-            Add(Defaults.OreTooltips, "Ore: {0}", 
+            Add(Defaults.OreTooltips, "Ore: {0}",
                 () => ModContent.GetInstance<AccessibilityModConfig>().ShowOreTooltips);
             Add(Defaults.BackgroundWallAvailable, "Wall: {0}",
                 () => ModContent.GetInstance<AccessibilityModConfig>().ShowBackgroundWallAvailable);
@@ -31,13 +32,13 @@ namespace AccessibilityMod.UI {
             displays.Remove(name);
         }
 
-        public AccessibilityInfo Get(string name) {
+        public AccessibilityDisplay Get(string name) {
             return displays[name];
         }
 
-        public AccessibilityInfo[] GetAll(bool sorted = true) {
+        public AccessibilityDisplay[] GetAll(bool sorted = true) {
             if(sorted) {
-                List<AccessibilityInfo> list = displays.Values.ToList();
+                List<AccessibilityDisplay> list = displays.Values.ToList();
                 list.Sort((d1, d2) => d1.Order.CompareTo(d2.Order));
 
                 return list.ToArray();
@@ -51,14 +52,14 @@ namespace AccessibilityMod.UI {
             displays[name].SetFormattedText(text);
         }
 
-        public AccessibilityInfo[] GetVisible(bool sorted = true) {
+        public AccessibilityDisplay[] GetVisible(bool sorted = true) {
             return GetAll(sorted).Where(d => d.IsVisible).ToArray();
         }
 
-        internal void Rearrange(AccessibilityInfo display, bool increment) {
+        internal void Rearrange(AccessibilityDisplay display, bool increment) {
             int order = display.Order;
             int index = Array.FindIndex(GetAll(true), d => d == display);
-            AccessibilityInfo nextDisplay;
+            AccessibilityDisplay nextDisplay;
 
             if(increment && order < Count - 1) {
                 nextDisplay = GetAll().FirstOrDefault(d => d.Order == order + 1);

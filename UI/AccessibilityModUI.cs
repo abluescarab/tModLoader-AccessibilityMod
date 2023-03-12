@@ -31,7 +31,7 @@ namespace AccessibilityMod.UI {
         public override void Update(GameTime gameTime) {
             base.Update(gameTime);
 
-            foreach(AccessibilityInfo display in AccessibilityModSystem.Displays.GetAll()) {
+            foreach(AccessibilityDisplay display in AccessibilityModSystem.Displays.GetAll()) {
                 display.ResetText();
             }
         }
@@ -47,7 +47,7 @@ namespace AccessibilityMod.UI {
         }
 
         public void CreateChildren() {
-            AccessibilityInfo[] visibleDisplays = AccessibilityModSystem.Displays.GetVisible(true);
+            AccessibilityDisplay[] visibleDisplays = AccessibilityModSystem.Displays.GetVisible(true);
             int displayed = visibleDisplays.Length;
             int lineSpacing = FontAssets.MouseText.Value.LineSpacing;
             int index = 0;
@@ -60,7 +60,7 @@ namespace AccessibilityMod.UI {
                 * displayed
                 + (lineSpacing / 2), 0);
 
-            foreach(AccessibilityInfo display in visibleDisplays) {
+            foreach(AccessibilityDisplay display in visibleDisplays) {
                 display.Left.Set(0, 0);
                 display.Top.Set(lineSpacing * index++, 0);
                 Panel.Append(display);
@@ -81,7 +81,7 @@ namespace AccessibilityMod.UI {
                 return;
             }
 
-            AccessibilityModSystem.Displays.SetText(AccessibilityInfoDisplays.Defaults.OreTooltips, 
+            AccessibilityModSystem.Displays.SetText(AccessibilityInfoDisplays.Defaults.OreTooltips,
                 TileID.Search.GetName(type));
         }
 

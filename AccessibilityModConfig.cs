@@ -63,7 +63,7 @@ namespace AccessibilityMod {
             AccessibilityModSystem.UI.Panel.BackgroundColor = PanelBackgroundColor;
             AccessibilityModSystem.UI.Panel.BorderColor = PanelBorderColor;
 
-            foreach(AccessibilityInfo display in AccessibilityModSystem.Displays.GetAll()) {
+            foreach(AccessibilityDisplay display in AccessibilityModSystem.Displays.GetAll()) {
                 display.TextElement.TextColor = PanelTextColor;
                 display.ChangeAppearance(ShowReorderButtons);
             }
