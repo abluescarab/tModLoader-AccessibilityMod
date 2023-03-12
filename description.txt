@@ -5,6 +5,7 @@ Have another accessibility idea? Leave a comment or open an issue on the GitHub!
 Features:
 * Show ore type under the mouse cursor
 * Show whether a wall is available under the mouse cursor
+* Show whether the tile under the mouse hover can be grappled to
 
 [Changelog]
 v1.0.0  2023-03-12
