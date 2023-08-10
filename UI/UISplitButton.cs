@@ -34,7 +34,7 @@ namespace AccessibilityMod.UI {
             Width.Set(UICommon.ButtonUpDownTexture.Value.Width, 0);
             Height.Set(UICommon.ButtonUpDownTexture.Value.Height, 0);
 
-            OnClick += (evt, element) => {
+            OnLeftClick += (evt, element) => {
                 Rectangle r = element.GetDimensions().ToRectangle();
 
                 if(evt.MousePosition.Y < r.Y + r.Height / 2) {
