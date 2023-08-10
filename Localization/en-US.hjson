@@ -1,46 +1,73 @@
-﻿Mods: {
-    AccessibilityMod: {
-        ModConfig_Label: Options
-        MoveUp_Label: Move up
-        MoveDown_Label: Move down
+Mods: {
+	AccessibilityMod: {
+		MoveUp_Label: Move up
+		MoveDown_Label: Move down
 
-        Info: {
-            Yes: Yes
-            No: No
-            Default: No information
-        }
+		Info: {
+			Yes: Yes
+			No: No
+			Default: No information
+		}
 
-        Panel: {
-            PanelOptions_Header: Panel Options
+		Configs: {
+			AccessibilityModConfig: {
+				DisplayName: Accessibility Mod Config
 
-            ShowReorderButtons_Label: Show reorder buttons
-            ShowReorderButtons_Tooltip: Show buttons that move info lines up or down
+				PanelBackgroundColor: {
+					Tooltip: ""
+					Label: Panel background color
+				}
 
-            AllowDraggingPanel_Label: Allow dragging panel
-            AllowDraggingPanel_Tooltip: Allow dragging the information panel around the screen
+				PanelBorderColor: {
+					Tooltip: ""
+					Label: Panel border color
+				}
 
-            PanelBackgroundColor_Label: Panel background color
-            PanelBorderColor_Label: Panel border color
-            PanelTextColor_Label: Panel text color
+				PanelTextColor: {
+					Tooltip: ""
+					Label: Panel text color
+				}
 
-            ResetPanelLocation_Label: Reset panel location
-            ResetPanelLocation_Tooltip: Only works when loaded into a world
-        }
-        
-        Tooltips: {
-            TooltipOptions_Header: Tooltip Options
+				EnableLongRangeTooltips: {
+					Label: Enable long-range tooltips
+					Tooltip: Display tooltips when the tile is hovered over, regardless of distance from the player
+				}
 
-            EnableLongRangeTooltips_Label: Enable long-range tooltips
-            EnableLongRangeTooltips_Tooltip: Display tooltips when the tile is hovered over, regardless of distance from the player
+				ShowOreTooltips: {
+					Label: Show ore tooltips
+					Tooltip: Display a tooltip when hovering over an ore vein in the environment
+				}
 
-            ShowOreTooltips_Label: Show ore tooltips
-            ShowOreTooltips_Tooltip: Display a tooltip when hovering over an ore vein in the environment
+				ShowBackgroundWallAvailable: {
+					Label: Show background wall availability
+					Tooltip: Display a tooltip showing whether a background wall is available under your mouse cursor
+				}
 
-            ShowBackgroundWallAvailable_Label: Show background wall availability
-            ShowBackgroundWallAvailable_Tooltip: Display a tooltip showing whether a background wall is available under your mouse cursor
+				ShowCanGrappleTo: {
+					Label: Show grapple distance
+					Tooltip: Display a tooltip showing whether the hovered tile can be grappled to
+				}
 
-            ShowCanGrappleTo_Label: Show grapple distance
-            ShowCanGrappleTo_Tooltip: Display a tooltip showing whether the hovered tile can be grappled to
-        }
-    }
+				ShowReorderButtons: {
+					Label: Show reorder buttons
+					Tooltip: Show buttons that move info lines up or down
+				}
+
+				AllowDraggingPanel: {
+					Label: Allow dragging panel
+					Tooltip: Allow dragging the information panel around the screen
+				}
+
+				ResetPanelLocation: {
+					Label: Reset panel location
+					Tooltip: Only works when loaded into a world
+				}
+
+				Headers: {
+					TooltipOptions: Tooltip Options
+					PanelOptions: Panel Options
+				}
+			}
+		}
+	}
 }
